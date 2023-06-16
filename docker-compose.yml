@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+  main-network:
+    name: ${NETWORK_NAME}
+
+services:
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    image: ${PG_IMAGE}
+    container_name: ${PG_CONTAINER_NAME}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: ${PG_DATA}
+    volumes:
+       - postgres-volume:${PG_DATA}
+    ports:
+      - ${DATABASE_LOCAL_PORT}:5432
+    networks:
+      - main-network
+  shell:
+    build:
+        context: ./shell
+        dockerfile: Dockerfile
+    image: spark-shell-image
+    command: sh -c "while true; do sleep 1; done"
+    depends_on:
+      - database
+    container_name: spark-shell
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PG_CONTAINER_NAME: ${PG_CONTAINER_NAME}
+    volumes:
+       - ${PWD}${SHARED_DATA}:/opt/spark/work-dir
+    ports:
+      - ${SHELL_LOCAL_PORT}:4040
+    networks:
+      - main-network
+
+volumes:
+    postgres-volume:
+      name: ${PG_VOLUME}
+      external: true
