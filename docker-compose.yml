@@ -16,8 +16,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: ${PG_DATA}
-    volumes:
-       - postgres-volume:${PG_DATA}
     ports:
       - ${DATABASE_LOCAL_PORT}:5432
     networks:
@@ -42,8 +40,3 @@ services:
       - ${SHELL_LOCAL_PORT}:4040
     networks:
       - main-network
-
-volumes:
-    postgres-volume:
-      name: ${PG_VOLUME}
-      external: true
