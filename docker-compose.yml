@@ -26,11 +26,11 @@ services:
     build:
         context: ./shell
         dockerfile: Dockerfile
-    image: spark-shell-image
+    image: ${SHELL_IMAGE}
     command: sh -c "while true; do sleep 1; done"
     depends_on:
       - database
-    container_name: spark-shell
+    container_name: ${SHELL_CONTAINER_NAME}
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
