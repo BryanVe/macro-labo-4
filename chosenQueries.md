@@ -32,3 +32,9 @@ Obtén todas las enfermedades que tienen síntomas con una gravedad mayor a 6.
 Obtén las precauciones relacionadas con los síntomas con una gravedad menor o igual a 1.
   - SparkScala: ✅
   - SparkSQL:
+
+## Consulta 7:
+
+Obtén las enfermedades y sus síntomas correspondientes para aquellas enfermedades que tienen una descripción que contiene la palabra 'respiratory'.
+  - SparkScala: ✅
+  - SparkSQL:
