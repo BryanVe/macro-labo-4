@@ -1,6 +1,7 @@
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.rdd.{RDD}
 import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.{StructType, StructField, StringType}
 import org.apache.spark.SparkContext._
 
 import Connection.{doStuffWithManyTables}
@@ -22,7 +23,10 @@ def problem1(
     diseaseSymptomsRDD.flatMap(row => {
       val disease = row.getString(0)
       val symptoms =
-        row.toSeq.tail.filter(_ == querySymptom).distinct.map(_.asInstanceOf[String])
+        row.toSeq.tail
+          .filter(_ == querySymptom)
+          .distinct
+          .map(_.asInstanceOf[String])
 
       symptoms.map(symptom => (disease, symptom)).iterator
     })
@@ -36,19 +40,34 @@ def problem1(
         .mkString(", ")
     )
 
-  val resultsDF = reducedDiseaseSymptomsRDD.toDF("disease", "symptoms")
-  val resultsWithDescriptionsDF = diseaseDescriptionsDF
-    .as("dd")
-    .join(resultsDF.as("r"), $"dd.disease" === $"r.disease")
-    .select($"dd.*")
-  val numberOfRows = resultsWithDescriptionsDF.count().toInt
+  val pairDiseaseDescriptionsRDD: RDD[(String, String)] = diseaseDescriptionsRDD
+    .map(row => (row(0).asInstanceOf[String], row(1).asInstanceOf[String]))
 
-  resultsWithDescriptionsDF.show(numberOfRows, false)
+  val resultRDD =
+    pairDiseaseDescriptionsRDD.join(reducedDiseaseSymptomsRDD).map {
+      case (key, (description, symptom)) =>
+        Row(key, description, symptom)
+    }
+
+  val resultSchema = StructType(
+    Seq(
+      StructField("disease", StringType),
+      StructField("description", StringType),
+      StructField("symptom", StringType)
+    )
+  )
+
+  val resultDF = spark.createDataFrame(resultRDD, resultSchema)
+  val numberOfRows = resultDF.count().toInt
+
+  resultDF.show(numberOfRows, false)
   spark.close()
 }
 
 def main() = {
-  println("\nProblema 3: Obtén todas las enfermedades y descripciones de las enfermedades que tienen el síntoma 'Fiebre alta'")
+  println(
+    "\nProblema 3: Obtén todas las enfermedades y descripciones de las enfermedades que tienen el síntoma 'Fiebre alta'"
+  )
   doStuffWithManyTables(
     Array("disease_descriptions", "disease_symptoms"),
     problem1
