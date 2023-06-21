@@ -38,3 +38,9 @@ Obtén las precauciones relacionadas con los síntomas con una gravedad menor o 
 Obtén las enfermedades y sus síntomas correspondientes para aquellas enfermedades que tienen una descripción que contiene la palabra 'respiratory'.
   - SparkScala: ✅
   - SparkSQL:
+
+## Consulta 8:
+
+Obtén las enfermedades y sus precauciones correspondientes para aquellas enfermedades que tienen el síntoma 'headache'.
+  - SparkScala: ✅
+  - SparkSQL:

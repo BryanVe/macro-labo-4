@@ -29,7 +29,7 @@ Obtén las enfermedades y sus síntomas correspondientes para aquellas enfermeda
 
 ## Consulta 8:
 
-Obtén las enfermedades y sus precauciones correspondientes para aquellas enfermedades que tienen el síntoma 'Dolor de cabeza'.
+Obtén las enfermedades y sus precauciones correspondientes para aquellas enfermedades que tienen el síntoma 'headache'.
 
 
 ## Consulta 9:
