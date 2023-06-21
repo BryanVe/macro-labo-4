@@ -1,7 +1,7 @@
 ## Consulta 1
 
 Obtén todas las enfermedades junto con sus síntomas.
-  - SparkScala: 
+  - SparkScala: ✅
   - SparkSQL: ✅
 
 ## Consulta 2:
