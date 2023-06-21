@@ -31,7 +31,7 @@ Obtén todas las enfermedades que tienen síntomas con una gravedad mayor a 6.
 
 Obtén las precauciones relacionadas con los síntomas con una gravedad menor o igual a 1.
   - SparkScala: ✅
-  - SparkSQL:
+  - SparkSQL: ✅
 
 ## Consulta 7:
 
@@ -43,7 +43,7 @@ Obtén las enfermedades y sus síntomas correspondientes para aquellas enfermeda
 
 Obtén las enfermedades y sus precauciones correspondientes para aquellas enfermedades que tienen el síntoma 'headache'.
   - SparkScala: ✅
-  - SparkSQL:
+  - SparkSQL: ✅
 
 ## Consulta 21:
 

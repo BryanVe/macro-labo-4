@@ -31,7 +31,6 @@ Obtén las enfermedades y sus síntomas correspondientes para aquellas enfermeda
 
 Obtén las enfermedades y sus precauciones correspondientes para aquellas enfermedades que tienen el síntoma 'headache'.
 
-
 ## Consulta 9:
 
 Obtén todas las enfermedades que tienen síntomas con una gravedad mayor a 4 y precauciones relacionadas con esos síntomas.
