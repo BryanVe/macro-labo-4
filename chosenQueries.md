@@ -44,3 +44,9 @@ Obtén las enfermedades y sus síntomas correspondientes para aquellas enfermeda
 Obtén las enfermedades y sus precauciones correspondientes para aquellas enfermedades que tienen el síntoma 'headache'.
   - SparkScala: ✅
   - SparkSQL:
+
+## Consulta 21:
+
+Obtener los síntomas con su respectiva severidad para una enfermedad específica.
+  - SparkScala: ✅
+  - SparkSQL:
