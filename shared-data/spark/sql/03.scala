@@ -11,48 +11,33 @@ def problem1(
   val diseaseSymptomsDF = jdbcDFs(0)
   diseaseSymptomsDF.createOrReplaceTempView(diseaseSymptomsView)
 
-  val symptomView = "symptoms"
-  val symptomsDF = spark.sql(s"""
-    SELECT
-      disease,
-      CONCAT(
-        symptom1,
-        ';',
-        coalesce(symptom2, '-'),
-        ';',
-        coalesce(symptom3, '-'),
-        ';',
-        coalesce(symptom4, '-'),
-        ';',
-        coalesce(symptom5, '-'),
-        ';',
-        coalesce(symptom6, '-'),
-        ';',
-        coalesce(symptom7, '-'),
-        ';',
-        coalesce(symptom8, '-'),
-        ';',
-        coalesce(symptom9, '-'),
-        ';',
-        coalesce(symptom10, '-'),
-        ';',
-        coalesce(symptom11, '-'),
-        ';',
-        coalesce(symptom12, '-'),
-        ';',
-        coalesce(symptom13, '-'),
-        ';',
-        coalesce(symptom14, '-'),
-        ';',
-        coalesce(symptom15, '-'),
-        ';',
-        coalesce(symptom16, '-'),
-        ';',
-        coalesce(symptom17, '-')
-      ) as symptoms
-    FROM
-      $diseaseSymptomsView""")
-  symptomsDF.createOrReplaceTempView(symptomView)
+  val symptomsView = "symptoms"
+  val symptomsDF = diseaseSymptomsDF
+    .groupBy("disease")
+    .agg(
+      concat_ws(
+        ", ",
+        collect_set("symptom1"),
+        collect_set("symptom2"),
+        collect_set("symptom3"),
+        collect_set("symptom4"),
+        collect_set("symptom5"),
+        collect_set("symptom6"),
+        collect_set("symptom7"),
+        collect_set("symptom8"),
+        collect_set("symptom9"),
+        collect_set("symptom10"),
+        collect_set("symptom11"),
+        collect_set("symptom12"),
+        collect_set("symptom13"),
+        collect_set("symptom14"),
+        collect_set("symptom15"),
+        collect_set("symptom16"),
+        collect_set("symptom17")
+      )
+      .alias("symptoms")
+    )
+  symptomsDF.createOrReplaceTempView(symptomsView)
 
   val diseaseDescriptionsTable = tableNames(1)
   val diseaseDescriptionsView = s"${diseaseDescriptionsTable}_view"
@@ -63,7 +48,7 @@ def problem1(
     SELECT
       DISTINCT s.disease, d.description
     FROM
-      $symptomView s
+      $symptomsView s
     INNER JOIN
       $diseaseDescriptionsView d
     ON
