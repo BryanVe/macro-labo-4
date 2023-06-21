@@ -9,12 +9,11 @@ def problem1(
   val diseaseDescriptionTable = tableNames(0)
   val diseaseDescriptionView = s"${diseaseDescriptionTable}_view"
   val diseaseDescriptionsDF = jdbcDFs(0)
-
-  val diseaseSymptomsDF = jdbcDFs(1)
-  val diseaseSymptomsView = s"${tableNames(1)}_view"
-  val diseaseSymptomsTable = tableNames(1)
-
   diseaseDescriptionsDF.createOrReplaceTempView(diseaseDescriptionView)
+
+  val diseaseSymptomsTable = tableNames(1)
+  val diseaseSymptomsView = s"${diseaseSymptomsTable}_view"
+  val diseaseSymptomsDF = jdbcDFs(1)
   diseaseSymptomsDF.createOrReplaceTempView(diseaseSymptomsView)
 
   val resultDF = spark.sql(s"""
