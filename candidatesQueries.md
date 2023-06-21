@@ -17,7 +17,7 @@ Obtén la descripción y las precauciones para la enfermedad 'Malaria'.
 
 ## Consulta 5:
 
-Obtén todas las enfermedades que tienen síntomas con una gravedad mayor a 3.
+Obtén todas las enfermedades que tienen síntomas con una gravedad mayor a 6.
 
 ## Consulta 6:
 
