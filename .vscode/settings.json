@@ -5,5 +5,9 @@
   "cSpell.words": [
     "dbtable",
     "jdbc"
-  ]
+  ],
+  "cSpell.enableFiletypes": [
+    "markdown"
+  ],
+  "cSpell.language": "en,es-ES"
 }

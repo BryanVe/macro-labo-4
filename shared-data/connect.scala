@@ -23,8 +23,13 @@ object Connection {
       .option("password", PASSWORD)
       .load()
 
-    callback(spark, tableName, jdbcDF)
-    spark.close()
+    try {
+      callback(spark, tableName, jdbcDF)
+    } catch {
+      case e: Exception => println(e)
+    } finally {
+      spark.close()
+    }
   }
 
   def doStuffWithManyTables(
@@ -35,15 +40,20 @@ object Connection {
       .appName("Spark PostgreSQL connection")
       .getOrCreate()
     val jdbcDFs = for (tableName <- tableNames) yield spark
-        .read
-        .format("jdbc")
-        .option("url", s"jdbc:postgresql://$HOST:$PORT/$DB")
-        .option("dbtable", tableName)
-        .option("user", USER)
-        .option("password", PASSWORD)
-        .load()
+      .read
+      .format("jdbc")
+      .option("url", s"jdbc:postgresql://$HOST:$PORT/$DB")
+      .option("dbtable", tableName)
+      .option("user", USER)
+      .option("password", PASSWORD)
+      .load()
 
-    callback(spark, tableNames, jdbcDFs)
-    spark.close()
+    try {
+      callback(spark, tableNames, jdbcDFs)
+    } catch {
+      case e: Exception => println(e)
+    } finally {
+      spark.close()
+    }
   }
 }
