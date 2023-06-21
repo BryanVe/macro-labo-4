@@ -14,8 +14,6 @@ object Connection {
     val spark = SparkSession.builder()
       .appName("Spark PostgreSQL connection")
       .getOrCreate()
-    
-    
     val jdbcDF = spark
       .read
       .format("jdbc")
@@ -36,7 +34,6 @@ object Connection {
     val spark = SparkSession.builder()
       .appName("Spark PostgreSQL connection")
       .getOrCreate()
-
     val jdbcDFs = for (tableName <- tableNames) yield spark
         .read
         .format("jdbc")
