@@ -21,7 +21,7 @@ Obtén todas las enfermedades que tienen síntomas con una gravedad mayor a 6.
 
 ## Consulta 6:
 
-Obtén las precauciones relacionadas con los síntomas con una gravedad menor o igual a 2.
+Obtén las precauciones relacionadas con los síntomas con una gravedad menor o igual a 1.
 
 ## Consulta 7:
 

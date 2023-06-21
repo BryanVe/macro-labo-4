@@ -26,3 +26,9 @@ Obtén la descripción y las precauciones para la enfermedad 'Malaria'.
 Obtén todas las enfermedades que tienen síntomas con una gravedad mayor a 6.
   - SparkScala: ✅
   - SparkSQL:
+
+## Consulta 6:
+
+Obtén las precauciones relacionadas con los síntomas con una gravedad menor o igual a 1.
+  - SparkScala: ✅
+  - SparkSQL:
