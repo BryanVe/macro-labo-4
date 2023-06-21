@@ -13,5 +13,5 @@ Obtén las enfermedades y sus precauciones correspondientes para aquellas enferm
 ## Consulta 3:
 
 Obtén todas las enfermedades y descripciones de las enfermedades que tienen el síntoma 'Fiebre alta'.
-  - SparkScala:
+  - SparkScala: ✅
   - SparkSQL: ✅
