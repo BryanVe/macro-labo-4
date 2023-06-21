@@ -19,7 +19,7 @@ Obtén todas las enfermedades y descripciones de las enfermedades que tienen el 
 
 Obtén la descripción y las precauciones para la enfermedad 'Malaria'.
   - SparkScala: ✅
-  - SparkSQL:
+  - SparkSQL: ✅
 
 ## Consulta 5:
 

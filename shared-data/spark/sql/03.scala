@@ -1,7 +1,7 @@
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import Connection.{doStuffWithManyTables}
 
-def problem1(
+def problem3(
   spark: SparkSession,
   tableNames: Array[String],
   jdbcDFs: Array[DataFrame]
@@ -62,7 +62,7 @@ def main() = {
   println("Problema 3: Obtén todas las enfermedades y descripciones de las enfermedades que tienen el síntoma 'Fiebre alta':")
   doStuffWithManyTables(
     Array("disease_symptoms", "disease_descriptions"),
-    problem1
+    problem3
   )
   System.exit(0)
 }
