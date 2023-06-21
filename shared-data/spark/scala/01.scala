@@ -1,6 +1,7 @@
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.rdd.{RDD}
 import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.{StructType, StructField, StringType}
 import org.apache.spark.SparkContext._
 
 import Connection.{doStuffWithManyTables}
@@ -34,14 +35,27 @@ def problem1(
         .mkString(", ")
     )
 
-  val resultsDF = reducedDiseaseSymptomsRDD.toDF("disease", "symptoms")
-  val resultsWithDescriptionsDF = diseaseDescriptionsDF
-    .as("dd")
-    .join(resultsDF.as("r"), $"dd.disease" === $"r.disease")
-    .select($"dd.*", $"r.symptoms")
-  val numberOfRows = resultsWithDescriptionsDF.count().toInt
+  val pairDiseaseDescriptionsRDD: RDD[(String, String)] = diseaseDescriptionsRDD
+    .map(row => (row(0).asInstanceOf[String], row(1).asInstanceOf[String]))
 
-  resultsWithDescriptionsDF.show(numberOfRows, false)
+  val resultRDD =
+    pairDiseaseDescriptionsRDD.join(reducedDiseaseSymptomsRDD).map {
+      case (key, (description, symptom)) =>
+        Row(key, description, symptom)
+    }
+
+  val resultSchema = StructType(
+    Seq(
+      StructField("disease", StringType),
+      StructField("description", StringType),
+      StructField("symptoms", StringType)
+    )
+  )
+
+  val resultDF = spark.createDataFrame(resultRDD, resultSchema)
+  val numberOfRows = resultDF.count().toInt
+
+  resultDF.show(numberOfRows, false)
   spark.close()
 }
 
