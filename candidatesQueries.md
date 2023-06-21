@@ -1,6 +1,6 @@
 ## Consulta 1:
 
-Obtén todas las enfermedades junto con sus síntomas.
+Obtén todas las enfermedades junto con sus descripciones y síntomas.
 
 ## Consulta 2:
 
