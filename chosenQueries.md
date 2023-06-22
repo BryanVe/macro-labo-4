@@ -37,7 +37,7 @@ Obtén las precauciones relacionadas con los síntomas con una gravedad menor o 
 
 Obtén las enfermedades y sus síntomas correspondientes para aquellas enfermedades que tienen una descripción que contiene la palabra 'respiratory'.
   - SparkScala: ✅
-  - SparkSQL:
+  - SparkSQL: ✅
 
 ## Consulta 8:
 
